@@ -32,6 +32,8 @@ UCI HAR Dataset/test/X\_test.txt
 UCI HAR Dataset/train/X\_train.txt  
 Merged to a data frame (X) of 10299 rows and 561 columns.
 
+
+## Variable selection
 The names of the 561 variables are read from UCI HAR Dataset/features.txt  
 Variables which are measurements of mean or standard deviation are identified by index.  
 These 86 variables are selected from the merged data frame X.  
@@ -44,7 +46,7 @@ Variable names are left unchanged apart from replacement of unwanted characters:
 * ","  replaced with "\_"
 
 
-#### Final merge and summary  
+## Final merge and summary  
 The subjects, activities and 86 selected features are merged into a single data frame of 10299 rows and 88 columns.  
 Features are summarized by subject and activity as mean values.  
 Summarized as data frame of 180 rows and 88 columns.  
@@ -57,12 +59,12 @@ Saved as "tidy\_data.txt"
 * Frequency-domain features are denoted by f
 * X, Y, Z denote axial signal direction
 * Frequency-domain features also include a frequency-weighted mean (meanFreq)
-* Features are normalized and bounded within [-1,1].
+* Features are normalized and bounded within [-1,1]
 * (Original raw measurements in gravity units 'g' (accelerometer) and radians/second (gyroscope))
 
 
- 1   Subject 	values 1-30  
- 2   Activity 	walking, walking\_upstairs, walking\_downstairs, sitting, standing, laying  
+ 1   Subject 	(values 1-30)  
+ 2   Activity 	(walking, walking\_upstairs, walking\_downstairs, sitting, standing, laying)  
  3   tBodyAcc\_mean\_X   
  4   tBodyAcc\_mean\_Y   
  5   tBodyAcc\_mean\_Z   
