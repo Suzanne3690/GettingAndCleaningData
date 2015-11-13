@@ -58,8 +58,6 @@ require(dplyr)
 tidy_data <- X_keep %>% group_by(Subject, Activity) %>% summarise_each(funs(mean))
 dim(tidy_data)
 
-## save tidy_data as text file and save names for codebook
+## save tidy_data as text file 
 write.table(tidy_data, "tidy_data.txt", row.names=FALSE)
-write.table(names(X_keep), file="tidy_data_names.txt")
-
 
