@@ -13,7 +13,7 @@ activity_train <- read.table("./UCI HAR Dataset/train/y_train.txt")
 activity <- rbind(activity_test, activity_train)
 
 ## recode activity vector with descriptive levels
-activities <- c("walking", "walking_upstairs", "walking_downstairs", "sitting", "standing", "laying")
+activities <- c("walking", "walking upstairs", "walking downstairs", "sitting", "standing", "laying")
 activity <- as.character(activity$V1)
 activity <- factor(activity, levels = c("1","2","3","4","5","6"), labels=activities)
 table(activity)
@@ -37,25 +37,21 @@ keep_list <- keep_list[order(keep_list$V1),]
 ## make data frame of X with only the variables in keep_list,
 ## strip "(", ")", "-" and "," from the names 
 X_keep <- X[, keep_list$V1]
-Xnames <- keep_list$V2
-Xnames <- gsub("\\(\\)","",Xnames)
-Xnames <- gsub("\\(", "_", Xnames)
-Xnames <- gsub("\\)", "", Xnames)
-Xnames <- gsub("-","_", Xnames)
-Xnames <- gsub(",", "_", Xnames)
+Xnames <- tolower(keep_list$V2)
+Xnames <- gsub("\\(|\\)|-|,", "", Xnames)
 names(X_keep) <- Xnames
 
 ## bind the subject and activity variables with X_keep
 s <- cbind(subject, activity)
-names(s) <- c("Subject", "Activity")
+names(s) <- c("subject", "activity")
 X_keep <- cbind(s,X_keep)
-X_keep <- X_keep[order(X_keep$Subject, X_keep$Activity),]
+X_keep <- X_keep[order(X_keep$subject, X_keep$activity),]
 dim(X_keep)
 names(X_keep)
 
 ## summarise as mean values grouped by subject and activity
 require(dplyr)
-tidy_data <- X_keep %>% group_by(Subject, Activity) %>% summarise_each(funs(mean))
+tidy_data <- X_keep %>% group_by(subject, activity) %>% summarise_each(funs(mean))
 dim(tidy_data)
 
 ## save tidy_data as text file 
